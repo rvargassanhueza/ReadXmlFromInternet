@@ -26,10 +26,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     ArrayList<Article> articles;
     Activity activity;
 
-    public MyAdapter(Context c, ArrayList<Article> articles, Activity activity) {
+    public MyAdapter(Context c, ArrayList<Article> articles) {
         this.c = c;
         this.articles = articles;
-        this.activity = activity;
+
     }
 
     @Override
@@ -64,7 +64,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
             public void onClick(View v) {
 
 
-                Intent intent = new Intent(getAtivity, PictureDetailActivity.class);
+                Intent intent = new Intent(c, PictureDetailActivity.class);
                 if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.LOLLIPOP){
 
                     Explode explode = new Explode();

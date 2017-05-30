@@ -54,7 +54,7 @@ public class RSSParser extends AsyncTask<Void,Void,Boolean> {
         if(isParsed)
         {
             //BIND
-            rv.setAdapter(new MyAdapter(c,articles,null));
+            rv.setAdapter(new MyAdapter(c,articles));
 
         }else {
             Toast.makeText(c,"Unable To Parse",Toast.LENGTH_SHORT).show();
