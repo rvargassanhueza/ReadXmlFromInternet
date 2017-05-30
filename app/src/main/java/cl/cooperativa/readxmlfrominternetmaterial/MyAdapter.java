@@ -1,12 +1,11 @@
 package cl.cooperativa.readxmlfrominternetmaterial;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.transition.Explode;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +23,7 @@ import cl.cooperativa.readxmlfrominternetmaterial.view.PictureDetailActivity;
 public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     Context c;
     ArrayList<Article> articles;
-    Activity activity;
+
 
     public MyAdapter(Context c, ArrayList<Article> articles) {
         this.c = c;
@@ -39,14 +38,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
-        Article article=articles.get(position);
-        String title=article.getTitle();
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
+         Article article=articles.get(position);
+         String title=article.getTitle();
         //String desc=article.getDescription();
         String dateFecha=article.getTsFecha();
         String dateHora=article.getTsHora();
         String imageUrl=article.getImageUrl();
-
         holder.titleTxt.setText(title);
         holder.dateFechaTxt.setText(dateFecha);
         holder.dateHoraTxt.setText(dateHora);
@@ -57,14 +55,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
        // Log.i("valor total cadena",": "+cadenaUrl);
       Picasso.with(c).load(cadenaUrl).into(holder.img);
 
-
         holder.img.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
 
+              Intent intent = new Intent(c, PictureDetailActivity.class);
 
-                Intent intent = new Intent(c, PictureDetailActivity.class);
                 if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.LOLLIPOP){
 
                     Explode explode = new Explode();
@@ -76,18 +73,26 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
                     // .setExitTransition(explode);
                     // de lo contrario solo sería .setExitTransition(new Explode()); y toma los valores por defecto de Explode.
 
-                    activity.getWindow().setExitTransition(explode);
-                    activity.startActivity(intent, ActivityOptionsCompat.
-                            makeSceneTransitionAnimation(activity,v,activity.getString(R.string.transitonname_picture))
-                            .toBundle());
+               //  c.getWindow().setExitTransition(explode);
+                   // activity.startActivity(intent, ActivityOptionsCompat.
+                     //       makeSceneTransitionAnimation(activity,v,activity.getString(R.string.transitonname_picture))
+                     //       .toBundle());
+
+                    Log.i("titulo es "," :"+holder.titleTxt.getText().toString());
+                   // intent.putExtra("",holder.titleDetail.getText().toString() );
+
+                   c.startActivity(intent);
+
                 }else {
-
-                    activity.startActivity(intent);
-
+                    c.startActivity(intent);
                 }
             }
         });
-    }
+
+
+}
+
+
     @Override
     public int getItemCount() {
         return articles.size();
