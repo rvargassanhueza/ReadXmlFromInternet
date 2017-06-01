@@ -1,6 +1,5 @@
 package cl.cooperativa.readxmlfrominternetmaterial.view;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -16,10 +15,11 @@ public class PictureDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picture_detail);
         showToolbar("",true);
-        if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.LOLLIPOP){
-            getWindow().setEnterTransition(new Fade());
+        getWindow().setEnterTransition(new Fade());
+       /* if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.LOLLIPOP){
 
-        }
+
+        }*/
     }
 
     public void showToolbar(String tittle, boolean upButton/*, View view*/){

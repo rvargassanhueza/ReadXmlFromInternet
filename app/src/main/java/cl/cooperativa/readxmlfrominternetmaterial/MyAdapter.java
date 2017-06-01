@@ -24,11 +24,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     Context c;
     ArrayList<Article> articles;
 
-
     public MyAdapter(Context c, ArrayList<Article> articles) {
         this.c = c;
         this.articles = articles;
-
     }
 
     @Override
@@ -39,7 +37,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-         Article article=articles.get(position);
+         final Article article=articles.get(position);
          String title=article.getTitle();
         //String desc=article.getDescription();
         String dateFecha=article.getTsFecha();
@@ -78,22 +76,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
                      //       makeSceneTransitionAnimation(activity,v,activity.getString(R.string.transitonname_picture))
                      //       .toBundle());
 
+
+
                     Log.i("titulo es "," :"+holder.titleTxt.getText().toString());
-                   // intent.putExtra("",holder.titleDetail.getText().toString() );
-
+                    intent.putExtra("", String.valueOf(articles.get(position)));
                    c.startActivity(intent);
-
                 }else {
                     c.startActivity(intent);
                 }
             }
         });
-
-
 }
-
-
-    @Override
+       @Override
     public int getItemCount() {
         return articles.size();
     }
