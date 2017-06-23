@@ -13,7 +13,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
     TextView titleTxt,dateFechaTxt,dateHoraTxt;
     TextView titleDetail;
     ImageView img;
-    String tsArticle;
+
     public MyViewHolder(View itemView) {
         super(itemView);
 
@@ -24,5 +24,6 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
         dateFechaTxt= (TextView) itemView.findViewById(R.id.dateFechaTxt);
         dateHoraTxt=(TextView)itemView.findViewById(R.id.dateHoraTxt) ;
         img= (ImageView) itemView.findViewById(R.id.articleImage);
+
     }
 }

@@ -26,6 +26,16 @@
             >
 
         </activity>
+
+        <activity android:name=".MyAdapterDetail">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.ContainerActivity" /> <!-- soporte para versiones anteriores a lollipop o 5.1 -->
+            >
+
+        </activity>
+
+
     </application>
 
 </manifest>

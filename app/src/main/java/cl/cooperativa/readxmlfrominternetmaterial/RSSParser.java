@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+import cl.cooperativa.readxmlfrominternetmaterial.model.Article;
+
 /**
  * Created by innova6 on 24-05-2017.
  */

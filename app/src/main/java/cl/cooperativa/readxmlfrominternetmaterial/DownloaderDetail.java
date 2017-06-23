@@ -4,7 +4,6 @@ package cl.cooperativa.readxmlfrominternetmaterial;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import java.io.BufferedInputStream;
@@ -16,17 +15,14 @@ import java.net.HttpURLConnection;
  * Created by innova6 on 24-05-2017.
  */
 
-public class Downloader extends AsyncTask<Void,Void,Object> {
+public class DownloaderDetail extends AsyncTask<Void,Void,Object> {
     Context c;
     String urlAddress;
-    RecyclerView rv;
     ProgressDialog pd;
-    Boolean flag;
-    public Downloader(Context c, String urlAddress, RecyclerView rv, Boolean flag) {
+
+    public DownloaderDetail(Context c, String urlAddress) {
         this.c = c;
         this.urlAddress = urlAddress;
-        this.rv = rv;
-
     }
 
     @Override
@@ -50,7 +46,7 @@ public class Downloader extends AsyncTask<Void,Void,Object> {
             Toast.makeText(c, data.toString(), Toast.LENGTH_SHORT).show();
         }else {
             //PARSE
-            new RSSParser(c, (InputStream) data,rv).execute();
+         //   new RSSParserDetail(c, (InputStream) data).execute();
 
         }
     }
@@ -63,6 +59,8 @@ public class Downloader extends AsyncTask<Void,Void,Object> {
         }
         try
         {
+            System.out.println("estoy en DownloaderDetail, con la URL:"+urlAddress);
+
             HttpURLConnection con= (HttpURLConnection) connection;
             int responseCode=con.getResponseCode();
             if(responseCode==con.HTTP_OK)

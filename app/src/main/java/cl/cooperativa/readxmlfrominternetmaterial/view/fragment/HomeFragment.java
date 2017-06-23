@@ -25,7 +25,6 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -34,9 +33,7 @@ public class HomeFragment extends Fragment {
         showToolbar(getResources().getString(R.string.tab_home),false,view);
         RecyclerView pictureRecycler=(RecyclerView) view.findViewById(R.id.pictureRecycler);
 
-
-        new Downloader(this.getActivity(),urlAddress,pictureRecycler).execute();
-
+        new Downloader(this.getActivity(),urlAddress,pictureRecycler,true).execute();
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -51,19 +48,6 @@ public class HomeFragment extends Fragment {
 
 
     }
-
-   /* public ArrayList<Picture> buidPictures(){
-
-        ArrayList<Picture> pictures= new ArrayList<>();
-
-        pictures.add(new Picture("http://www.cooperativa.cl/noticias/site/artic/20170321/imag/foto_0000001120170321085609.jpg","Beatriz Sánchez","1 días","10 like"));
-        pictures.add(new Picture("http://www.cooperativa.cl/noticias/site/artic/20170321/imag/foto_0000001020170321105605.jpg","Salud Pública","2 días","11 like"));
-        pictures.add(new Picture("http://www.cooperativa.cl/noticias/site/artic/20170321/imag/foto_0000001020170321110458.jpg","Claudio Bravo","3 días","12 like"));
-        pictures.add(new Picture("http://www.cooperativa.cl/noticias/site/artic/20170321/imag/foto_0000001020170321100515.jpg","Arturo Vidal","4 días","13 like"));
-
-        return  pictures;
-    }*/
-
 
 
     public void showToolbar(String tittle, boolean upButton, View view){

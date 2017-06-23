@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.transition.Explode;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +13,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import cl.cooperativa.readxmlfrominternetmaterial.model.Article;
 import cl.cooperativa.readxmlfrominternetmaterial.view.PictureDetailActivity;
 
 /**
@@ -23,6 +23,7 @@ import cl.cooperativa.readxmlfrominternetmaterial.view.PictureDetailActivity;
 public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     Context c;
     ArrayList<Article> articles;
+
 
     public MyAdapter(Context c, ArrayList<Article> articles) {
         this.c = c;
@@ -38,20 +39,24 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
          final Article article=articles.get(position);
+        System.out.println("MyAdater, position es: "+position);
          String title=article.getTitle();
         //String desc=article.getDescription();
         String dateFecha=article.getTsFecha();
         String dateHora=article.getTsHora();
         String imageUrl=article.getImageUrl();
+        final String tsarticle=article.getTsArticle();
+
         holder.titleTxt.setText(title);
         holder.dateFechaTxt.setText(dateFecha);
         holder.dateHoraTxt.setText(dateHora);
+
 
         String baseUrl = "http://www.cooperativa.cl";
         String cadenaUrl = baseUrl+imageUrl;
 
        // Log.i("valor total cadena",": "+cadenaUrl);
-      Picasso.with(c).load(cadenaUrl).into(holder.img);
+        Picasso.with(c).load(cadenaUrl).into(holder.img);
 
         holder.img.setOnClickListener(new View.OnClickListener(){
 
@@ -78,8 +83,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
 
 
-                    Log.i("titulo es "," :"+holder.titleTxt.getText().toString());
-                    intent.putExtra("", String.valueOf(articles.get(position)));
+                  //  Log.i("el ts es "," :"+tsarticle.toString());
+                    intent.putExtra("article_object", article);
                    c.startActivity(intent);
                 }else {
                     c.startActivity(intent);
@@ -91,4 +96,5 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     public int getItemCount() {
         return articles.size();
     }
+
 }

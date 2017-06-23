@@ -1,10 +1,12 @@
-package cl.cooperativa.readxmlfrominternetmaterial;
+package cl.cooperativa.readxmlfrominternetmaterial.model;
+
+import java.io.Serializable;
 
 /**
  * Created by innova6 on 24-05-2017.
  */
 
-public class Article {
+public class Article implements Serializable {
 
     String title, description,tsArticle, tsHora,tsFecha, imageUrl;
 
