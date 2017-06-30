@@ -47,6 +47,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         String imageUrl=article.getImageUrl();
         final String tsarticle=article.getTsArticle();
 
+
         holder.titleTxt.setText(title);
         holder.dateFechaTxt.setText(dateFecha);
         holder.dateHoraTxt.setText(dateHora);

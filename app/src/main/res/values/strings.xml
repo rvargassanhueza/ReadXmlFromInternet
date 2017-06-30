@@ -16,14 +16,14 @@
     <string name="firstword_card">Hace</string>
     <string name="timecard_card">4 días</string>
     <string name="likenumber_card">10 me gusta</string>
-    <string name="tab_search">Buscar</string>
-    <string name="tab_home">Home</string>
-    <string name="tab_profile">Yo</string>
+    <string name="tab_politica">Politica</string>
+    <string name="tab_portada">Portada</string>
+    <string name="tab_deportes">Deportes</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="secondword_detail">Me Gusta</string>
-    <string name="titleimagedetail">\"Todo copas en la playa\"</string>
+    <string name="titleimagedetail">\"TitleImageDetail"</string>
     <string name="lorem">\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi elementum pellentesque lectus ac cursus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.\"</string>
     <string name="transitonname_picture">transitonname_picture</string>
 </resources>

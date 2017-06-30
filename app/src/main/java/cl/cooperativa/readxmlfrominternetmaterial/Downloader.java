@@ -10,7 +10,8 @@ import android.widget.Toast;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
+
+import javax.net.ssl.HttpsURLConnection;
 
 /**
  * Created by innova6 on 24-05-2017.
@@ -21,7 +22,7 @@ public class Downloader extends AsyncTask<Void,Void,Object> {
     String urlAddress;
     RecyclerView rv;
     ProgressDialog pd;
-    Boolean flag;
+
     public Downloader(Context c, String urlAddress, RecyclerView rv, Boolean flag) {
         this.c = c;
         this.urlAddress = urlAddress;
@@ -60,12 +61,13 @@ public class Downloader extends AsyncTask<Void,Void,Object> {
         if(connection.toString().startsWith("Error"))
         {
             return connection.toString();
+
         }
         try
         {
-            HttpURLConnection con= (HttpURLConnection) connection;
+            HttpsURLConnection con= (HttpsURLConnection) connection;
             int responseCode=con.getResponseCode();
-            if(responseCode==con.HTTP_OK)
+            if(responseCode==200)
             {
                 InputStream is=new BufferedInputStream(con.getInputStream());
                 return is;

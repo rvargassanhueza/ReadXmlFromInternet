@@ -1,16 +1,21 @@
 package cl.cooperativa.readxmlfrominternetmaterial;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 import cl.cooperativa.readxmlfrominternetmaterial.model.ArticleDetail;
@@ -29,7 +34,8 @@ public class MyAdapterDetail extends AppCompatActivity implements Serializable {
 
    // MyViewHolderDetail myViewHolderDetail;
 //TextView  titleDetail = (TextView) findViewById(R.id.userNameDatail);
-    public TextView titleDetail,descDetail;
+    public TextView titleDetail;
+    public WebView descDetail;
     public ImageView imageDetail;
 
     @Override
@@ -43,10 +49,14 @@ public class MyAdapterDetail extends AppCompatActivity implements Serializable {
         setContentView(R.layout.activity_picture_detail);
         showToolbar("",true);
         System.out.println("Estoy en el AdapterDetail");
-        setElementDetail();
+        try {
+            setElementDetail();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void setElementDetail(){
+    public void setElementDetail() throws MalformedURLException {
 //        System.out.println("MyAdapterDetail en setElemetDetail, el tamaño de arreglo es: "+articles.size());
         articles= (ArrayList<ArticleDetail>) getIntent().getSerializableExtra("_objeto");
 
@@ -54,24 +64,55 @@ public class MyAdapterDetail extends AppCompatActivity implements Serializable {
         String imageUrl=article.getImageUrlDetail();
         String titledet=article.getTitleDetail();
         String desc=article.getContDetail();
+        String cuerpo = article.getCuerpoEnVivo();
+        String desCuerpo;
 
-        String baseUrl = "http://www.cooperativa.cl";
-        String cadenaUrl = baseUrl+imageUrl;
+        if (cuerpo==null){
+          //  System.out.println("MyAdapterDetail, cuerpo vacio");
+          desCuerpo=desc;
+        }else{
+          //  System.out.println("MyAdapterDetail, cuerpo no vacio");
+            desCuerpo=cuerpo+desc;
+        }
 
-        //Picasso.with(c).load(cadenaUrl).into((ImageView) img.findViewById(R.id.imageHeader));
+        String cadenaUrl = "https://m.cooperativa.cl"+imageUrl;
+
         imageDetail=(ImageView) findViewById(R.id.imageHeader);
-        Picasso.with(c).load(cadenaUrl).into(imageDetail);
+        Picasso.with(c).load(cadenaUrl).into((ImageView) imageDetail.findViewById(R.id.imageHeader));
+
         titleDetail = (TextView) findViewById(R.id.userNameDatail);
         titleDetail.setText(titledet);
-        descDetail =(TextView) findViewById(R.id.textContentImageDetail) ;
-        descDetail.setText(desc);
 
-        System.out.println("Mi cadena URL es: "+cadenaUrl);
+        descDetail =(WebView) findViewById(R.id.textContentImageDetail) ;
+        descDetail.getSettings().setJavaScriptEnabled(true);
+        descDetail.setWebChromeClient(new WebChromeClient());
+        descDetail.getSettings().setDomStorageEnabled(true);
+
+        descDetail.loadData(desCuerpo,"text/html; charset=UTF-8",null);
+       // descDetail.loadData(desc,"text/html; charset=UTF-8",null);
+
+
+       // System.out.println("Mi cadena URL es: "+cadenaUrl);
        // System.out.println("Mi titulo es: "+titledet);
       //  System.out.println("Mi Detalle es: "+desc);
 
     }
+    private class ImageGetters implements Html.ImageGetter {
 
+        public Drawable getDrawable(String source) {
+            int id;
+            if (source.equals("ic_account_circle.png")) {
+                id = R.drawable.ic_account_circle;
+            }
+            else {
+                return null;
+            }
+
+            Drawable d = getResources().getDrawable(id);
+            d.setBounds(0,0,d.getIntrinsicWidth(),d.getIntrinsicHeight());
+            return d;
+        }
+    };
     public void showToolbar(String tittle, boolean upButton/*, View view*/){
         /*se crea el metodo showtoolbar para traer toolbar según maqueta de diseño*/
         /*este metodo no debe llevar view porque estamos en cotexto de activity*/

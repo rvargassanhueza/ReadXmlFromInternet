@@ -91,18 +91,12 @@
                 android:layout_height="@dimen/height_divider"
                 android:background="@android:color/darker_gray" />
 
-            <TextView
+            <WebView
                 android:id="@+id/textContentImageDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:paddingLeft="@dimen/padding_horizontal_textcontendetail"
-                android:paddingRight="@dimen/padding_horizontal_textcontendetail"
-                android:paddingTop="@dimen/paddingtop_tittleimagedetail"
-                android:text="@string/lorem"
-                android:textSize="@dimen/textsize_likenumberdetail"
+                android:visibility="visible" />
 
-                />
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

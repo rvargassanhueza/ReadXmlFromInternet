@@ -8,20 +8,28 @@ import java.io.Serializable;
 
 public class ArticleDetail implements Serializable {
 
-    private String titleDetail,contDetail,imageUrlDetail;
+    private String titleDetail,contDetail,imageUrlDetail,cuerpoEnVivo;
 
     public ArticleDetail() {
     }
 
-    public ArticleDetail(String titleDetail, String contDetail, String imageUrlDetail) {
+    public ArticleDetail(String titleDetail, String contDetail, String imageUrlDetail,String cuerpoEnVivo) {
         this.titleDetail = titleDetail;
         this.contDetail = contDetail;
         this.imageUrlDetail = imageUrlDetail;
+        this.cuerpoEnVivo=cuerpoEnVivo;
     }
 
+    public String getCuerpoEnVivo() {
+        return cuerpoEnVivo;
+    }
+
+    public void setCuerpoEnVivo(String cuerpoEnVivo) {
+        this.cuerpoEnVivo = cuerpoEnVivo;
+    }
 
     public String getTitleDetail() {
-        System.out.println("Article Detail, titleDetail: "+titleDetail);
+       // System.out.println("Article Detail, titleDetail: "+titleDetail);
         return titleDetail;
     }
 

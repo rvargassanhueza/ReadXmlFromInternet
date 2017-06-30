@@ -5,18 +5,15 @@ import android.content.Context;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.Serializable;
 import java.net.URL;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.DataOutputStream;
+
 import javax.net.ssl.HttpsURLConnection;
 
 import cl.cooperativa.readxmlfrominternetmaterial.model.ArticleDetail;
@@ -43,65 +40,38 @@ public class RSSParserDetail implements Serializable{
     private  String title;
     private String link;
     private String description;
+    private String cuerpoEnVivo;
 
     public static final String ITEM = "artic_data";
     public static final String CHANNEL = "private";
     public static final String TITLE = "_txt_titular";
     public static final String LINK = "fotofija_port_649x365";
     public static final String DESCRIPTION = "vtxt_cuerpo";
+    public static final String CUERPOENVIVO = "cuerpo_en_vivo";
+
+
 
 
       public RSSParserDetail( String urlString ) {
           this.urlString=urlString;
     }
-    public static InputStream downloadUrl(String urlString) throws IOException, NoSuchAlgorithmException, KeyManagementException {
+    public  InputStream downloadUrl(String urlString) throws IOException, NoSuchAlgorithmException, KeyManagementException {
 
-               /* URL url = new URL(urlString);
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-                conn.setRequestMethod("GET");
-                conn.setDoInput(true);
-                conn.connect();
+        URL url = new URL(urlString);
+        HttpsURLConnection con = (HttpsURLConnection)url.openConnection();
 
-                InputStream stream = conn.getInputStream();
-                return stream;*/
-
-    URL url = new URL(urlString);
-    HttpsURLConnection connection = (HttpsURLConnection)url.openConnection();
-    String urlParameters ="";
-    connection.setRequestMethod("POST");
-    connection.setRequestProperty("USER-AGENT","Mozilla/S.O");
-    connection.setRequestProperty("ACCEPT-LANGUAGE","en-us,en;O.S");
-    connection.setDoOutput(true);
-    DataOutputStream dStream = new DataOutputStream(connection.getOutputStream());
-    dStream.writeBytes(urlParameters);
-    dStream.flush();
-    dStream.close();
-
-    int responseCode = connection.getResponseCode();
-    String output ="Request URL "+urlString;
-    output+= System.getProperty("line.separator")+"Request Parameters"+urlParameters;
-    output+= System.getProperty("line.separator")+"Response Code "+responseCode;
-
-    BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-    String line ="";
-    StringBuilder responseOutput = new StringBuilder();
-
-    while ((line=br.readLine())!=null){
-        responseOutput.append(line);
-            }
-    br.close();
-    output+= System.getProperty("line.separator")+responseOutput.toString();
-
+        InputStream stream = con.getInputStream();
+        return stream;
        }
-
     public List<ArticleDetail> parse() {
         try {
             int count = 0;
             factory = XmlPullParserFactory.newInstance();
             parser = factory.newPullParser();
+            System.out.println("RSSPerserDetail, urlString: "+urlString);
             urlStream = downloadUrl(urlString);
-           // parser.setInput(urlStream, null);
+            parser.setInput(urlStream, null);
             int eventType = parser.getEventType();
             boolean done = false;
             rssFeed = new ArticleDetail();
@@ -122,9 +92,15 @@ public class RSSParserDetail implements Serializable{
                         }
                         if (tagName.equals(LINK)) {
                             link = parser.nextText().toString();
+                            link= link.trim();//quitamos los espacios en blaco de path de conexión.
+                           // System.out.println("RSSParserDetail, trae el link foto"+link);
                         }
                         if (tagName.equals(DESCRIPTION)) {
                             description = parser.nextText().toString();
+                        }
+                        if (tagName.equals(CUERPOENVIVO)) {
+                            cuerpoEnVivo = parser.nextText().toString();
+                            cuerpoEnVivo=cuerpoEnVivo.trim();
                         }
 
                         break;
@@ -133,7 +109,7 @@ public class RSSParserDetail implements Serializable{
                             done = true;
                         } else if (tagName.equals(ITEM)) {
                             System.out.println("RSSParserDetail, em case XmlPullParser.END_TAG");
-                            rssFeed=new ArticleDetail(title,description,link);
+                            rssFeed=new ArticleDetail(title,description,link,cuerpoEnVivo);
                             rssFeedList.add(rssFeed);
                         }
                         break;

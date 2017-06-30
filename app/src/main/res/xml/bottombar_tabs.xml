@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <tabs>
     <tab
-        id="@+id/search"
-        tittle="@string/tab_search"
+        id="@+id/politica"
+        tittle="@string/tab_politica"
         barColorWhenSelected="@color/colorPrimary"
-        icon="@drawable/ic_search"/>
+        icon="@drawable/ic_group"/>
 
     <tab
-        id="@+id/home"
-        tittle="@string/tab_home"
+        id="@+id/portada"
+        tittle="@string/tab_portada"
         barColorWhenSelected="@color/colorPrimary"
         icon="@drawable/ic_home"/>
 
     <tab
-        id="@+id/profile"
-        tittle="@string/tab_profile"
+        id="@+id/deportes"
+        tittle="@string/tab_deportes"
         barColorWhenSelected="@color/colorPrimary"
-        icon="@drawable/ic_account_circle"/>
+        icon="@drawable/ic_directions_bike"/>
 
 </tabs>

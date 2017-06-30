@@ -79,7 +79,7 @@ public void setElement (){
 
         //Armando Url para capturar archivo de articulo en servidor
         String tsArticle = article.getTsArticle();
-        String baseUrl="https://www.cooperativa.cl/noticias/site/artic/";
+        String baseUrl="https://m.cooperativa.cl/noticias/site/artic/";
         String titleDetail = article.getTitle();
         String dataTs = tsArticle.substring(0,8);
         String aammdd = dataTs;
@@ -87,11 +87,13 @@ public void setElement (){
         String finalUrl= tsArticle+".xml";
         String linkXml=baseUrl+aammdd+directorioXml+finalUrl;
         //***********************************************************
-        String linkPaso="http://especiales2.cooperativa.cl/2017/pruebas/rvargas/prontus_art_view_xml.xml";
-        System.out.println("estoy en PictureDetailActivity");
+
+        System.out.println("estoy en PictureDetailActivity y la URL es: "+linkXml);
 
     new DoRssFeedTask().execute(linkXml);
 }
+
+
 
     public class DoRssFeedTask extends AsyncTask<String, Void, List<ArticleDetail>> {
         ProgressDialog prog;

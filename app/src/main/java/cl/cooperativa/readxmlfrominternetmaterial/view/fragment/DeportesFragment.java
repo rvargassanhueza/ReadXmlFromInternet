@@ -1,6 +1,5 @@
 package cl.cooperativa.readxmlfrominternetmaterial.view.fragment;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -14,23 +13,22 @@ import android.view.ViewGroup;
 import cl.cooperativa.readxmlfrominternetmaterial.Downloader;
 import cl.cooperativa.readxmlfrominternetmaterial.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class HomeFragment extends Fragment {
-    final static String urlAddress="https://m.cooperativa.cl/noticias/site/tax/port/all/rss____1.xml";
 
+public class DeportesFragment extends Fragment {
 
-    public HomeFragment() {
+    final static String urlAddress="https://m.cooperativa.cl/noticias/site/tax/port/all/rss_1___1.xml";
+    public DeportesFragment() {
         // Required empty public constructor
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-        showToolbar(getResources().getString(R.string.tab_portada),false,view);
+        View view = inflater.inflate(R.layout.fragment_deportes, container, false);
+        showToolbar(getResources().getString(R.string.tab_deportes),false,view);
         RecyclerView pictureRecycler=(RecyclerView) view.findViewById(R.id.pictureRecycler);
 
         new Downloader(this.getActivity(),urlAddress,pictureRecycler,true).execute();
@@ -38,16 +36,11 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         pictureRecycler.setLayoutManager(linearLayoutManager);
+
         return view;
 
-
-       /* PictureAdapterRecyclerView pictureAdapterRecyclerView =
-                new PictureAdapterRecyclerView(buidPictures(),R.layout.model,getActivity());
-
-        pictureRecycler.setAdapter(pictureAdapterRecyclerView);*/
-
-
     }
+
 
 
     public void showToolbar(String tittle, boolean upButton, View view){
