@@ -38,6 +38,9 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         pictureRecycler.setLayoutManager(linearLayoutManager);
+
+
+
         return view;
 
 

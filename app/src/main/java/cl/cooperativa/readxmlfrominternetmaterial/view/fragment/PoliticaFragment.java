@@ -34,6 +34,23 @@ public class PoliticaFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         pictureRecycler.setLayoutManager(linearLayoutManager);
+
+        /*FloatingActionButton floatingActionButton = (FloatingActionButton) view.findViewById(R.id.fab);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                Reproductor reproductor = new Reproductor();
+                System.out.println("HomeFragment, Reproductor cargaMedia()");
+                reproductor.reproduceMedia();
+
+                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+
+
+        });*/
         return view;
     }
 
