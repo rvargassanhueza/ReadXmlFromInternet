@@ -5,6 +5,9 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import java.io.IOException;
 
@@ -17,27 +20,28 @@ public class Reproductor extends Activity {
    public MediaPlayer mediaPlayer = new MediaPlayer();
     Context context;
 
+    ProgressBar progressBar;
+    public void onCreate(Bundle savedInstance) {
+        System.out.println("Reproductor, onCreate");
+        super.onCreate(savedInstance);
 
-    public Context getContext() {
-        return context;
+        setContentView(R.layout.activity_container);
+        this.progressBar = (ProgressBar) findViewById(R.id.fabProgressBar);
+        reproduceMedia();
+
     }
 
-    //public  progressBarr;
-
-    //progressBarr = (ProgressBar) progressBarr.findViewById(R.id.fabProgressBar);
-    public Reproductor() {
-
+        public Reproductor() {
     }
 
-    //progressBarr
     public void reproduceMedia()
     {
-            cargaMedia cmedia = new cargaMedia();
-            cmedia.execute();
+        cargaMedia cmedia = new cargaMedia();
+        cmedia.execute();
     }
 
-
     public class cargaMedia extends AsyncTask<Void,Integer,Boolean> {
+
 
 
         @Override
@@ -51,12 +55,11 @@ public class Reproductor extends Activity {
         @Override
         protected void onPreExecute() {
 
-
+           progressBar.setVisibility(View.VISIBLE);
         }
         @Override
         protected void onPostExecute(Boolean aBoolean) {
-
-         //   progressBarr.setVisibility(View.INVISIBLE);
+            progressBar.setVisibility(View.INVISIBLE);
         }
         @Override
         protected Boolean doInBackground(Void... params) {
@@ -76,7 +79,6 @@ public class Reproductor extends Activity {
                return true;
 
         }
-
 
     }
 

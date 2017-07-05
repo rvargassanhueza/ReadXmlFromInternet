@@ -1,5 +1,6 @@
 package cl.cooperativa.readxmlfrominternetmaterial.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.design.widget.FloatingActionButton;
@@ -26,24 +27,28 @@ public class ContainerActivity extends AppCompatActivity {
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottonbar);
         bottomBar.setDefaultTab(R.id.portada);
 
+
         HomeFragment homeFragment = new HomeFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.container,homeFragment)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).addToBackStack(null).commit();
 
         FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+
+               floatingActionButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
 
-                Reproductor reproductor = new Reproductor();
-                System.out.println("HomeFragment, Reproductor cargaMedia()");
-                reproductor.reproduceMedia();
+               // Reproductor reproductor = new Reproductor();
+
+               // reproductor.reproduceMedia();
+
+                Intent intent = new Intent(ContainerActivity.this, Reproductor.class);
+                startActivity(intent);
 
                 /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
             }
-
 
         });
 
@@ -71,6 +76,7 @@ public class ContainerActivity extends AppCompatActivity {
 });
 
     }
+
 
     @Override
     protected void onPause()
